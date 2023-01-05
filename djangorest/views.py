@@ -12,3 +12,11 @@ def testresponse(request):
     serializer = DummySerializer(all_objects, many=True)
     
     return Response(serializer.data)
+
+@api_view(['POST','GET'])
+def testresponse_add(request):
+    serializer = DummySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
